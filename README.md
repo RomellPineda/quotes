@@ -1,12 +1,23 @@
 # quotes
 
-### lab partner: Peter Hartnett
+*lab partner: Peter Hartnett*
 
-*Description*
+### getting started
+
+clone the repository into your local machine by running `git clone https://github.com/RomellPineda/quotes.git`
+
+open the project in your preferred IDE
+
+compile/build the project then run the project upon successful compile/build
+
+a random quote will be generated from the local file source upon successful start up of project
+
+
+### Description
 
 Java application that generates random quotes from API or in lieu of API from local quote collection.
 
-*Methods*
+### Methods
 
 Leverages http://api.forismatic.com for random quotes.
 
