@@ -14,7 +14,6 @@ import java.util.StringJoiner;
 
 public class App {
 
-
     public static String helloInternet() throws IOException {
         URL url = new URL("http://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en");
         HttpURLConnection areYouThere =  (HttpURLConnection) url.openConnection();
@@ -29,16 +28,14 @@ public class App {
             firstLine = input.readLine();
         }
 
-
         return pleaseWork.toString();
-
     }
 
     public static String getAQuote(){
         try {
             return helloInternet();
         } catch (IOException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return getJson();
         }
     }
@@ -47,6 +44,7 @@ public class App {
     public static void main(String[] args) {
         Gson gson = new Gson();
         Quote internetQuote = gson.fromJson(getAQuote(), Quote.class);
+        saveQuote(internetQuote);
         System.out.println("Here is your new quote: " + internetQuote);
     }
 
@@ -73,6 +71,22 @@ public class App {
             e.printStackTrace();
         }
         return "no info";
+    }
+
+    // https://docs.oracle.com/javase/7/docs/api/java/io/BufferedWriter.html and stackoverflow were referenced for this method
+    public static void saveQuote(Quote newQuote) {
+        BufferedWriter q;
+
+        try {
+            Gson gson = new Gson();
+            String stringQ = gson.toJson(newQuote);
+            q = new BufferedWriter(new FileWriter("src/main/java/quotes/savedquotes.json", true));
+            q.newLine();
+            q.append(stringQ);
+            q.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
